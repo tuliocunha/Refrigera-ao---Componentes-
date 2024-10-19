@@ -31,6 +31,12 @@ openRequest.onsuccess = (event) => {
     const questions = event.target.result;
     // Populate the unit and topic lists
     populateUnitList(questions);
+
+    // Load avatar images and populate the avatar grid
+    loadAvatarImages();
+
+    // Load random login screen background image
+    loadRandomLoginBackgroundImage();
   };
 };
 
@@ -130,4 +136,24 @@ function displayErrorMessage(message, error) {
     document.body.appendChild(errorMessageElement);
   }
   errorMessageElement.textContent = `Error: ${message} ${error ? error.message : ''}`;
+}
+
+// Function to load a random login screen background image
+function loadRandomLoginBackgroundImage() {
+  const loginScreenBackground = document.getElementById('login-screen-background');
+
+  // Fetch the list of image files from the specified directory
+  fetch('images/login_screen_background/')
+    .then(response => response.json())
+    .then(files => {
+      // Select a random image file
+      const randomIndex = Math.floor(Math.random() * files.length);
+      const selectedImage = files[randomIndex];
+
+      // Set the background image
+      loginScreenBackground.src = `images/login_screen_background/${selectedImage}`;
+    })
+    .catch(error => {
+      console.error('Error fetching background images:', error);
+    });
 }
