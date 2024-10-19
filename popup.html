@@ -5,41 +5,49 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="login-screen">
+  <div id="login-screen" aria-label="Login Screen">
     <h2>Login Screen</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <input type="text" id="nickname" placeholder="Nickname (optional)">
-    <button id="login-btn">Login</button>
+    <img id="login-screen-background" src="images/login_screen_background.jpg" alt="Login Screen Background">
+    <div class="login-form">
+      <button class="login-button">Username</button>
+      <input type="text" id="username" placeholder="Username" aria-label="Username" required>
+      <button class="login-button">Email</button>
+      <input type="email" id="email" placeholder="Email" aria-label="Email" required>
+      <button class="login-button">Password</button>
+      <input type="password" id="password" placeholder="Password" aria-label="Password" required>
+      <button class="login-button">Nickname</button>
+      <input type="text" id="nickname" placeholder="Nickname (optional)" aria-label="Nickname">
+      <button id="login-btn" aria-label="Login">Login</button>
+    </div>
   </div>
 
-  <div id="avatar-screen">
+  <div id="avatar-screen" aria-label="Avatar Screen">
     <h2>Avatar Screen</h2>
-    </div>
+    <button id="select-avatar-btn" aria-label="Select Avatar">Select Avatar</button>
+  </div>
 
-  <div id="units-screen">
+  <div id="units-screen" aria-label="Units Screen">
     <h2>Units Screen</h2>
     <ul id="unit-list"></ul>
   </div>
 
-  <div id="topics-screen">
+  <div id="topics-screen" aria-label="Topics Screen">
     <h2>Topics Screen</h2>
     <ul id="topic-list"></ul>
   </div>
 
-  <div id="questions-screen">
+  <div id="questions-screen" aria-label="Questions Screen">
     <h2>Questions Screen</h2>
-    <p id="question-text"></p>
+    <p id="question-text" aria-label="Question"></p>
     <div id="answer-options"></div>
-    <button id="submit-answer-btn">Submit Answer</button>
-    <p id="feedback-message"></p>
-    <p id="score"></p>
+    <button id="submit-answer-btn" aria-label="Submit Answer">Submit Answer</button>
+    <p id="feedback-message" aria-live="assertive"></p>
+    <p id="score" aria-label="Score"></p>
   </div>
 
-  <div id="score-screen">
+  <div id="score-screen" aria-label="Score Screen">
     <h2>Score Screen</h2>
-    <p id="final-score"></p>
+    <p id="final-score" aria-label="Final Score"></p>
   </div>
 </body>
 </html>
