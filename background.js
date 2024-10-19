@@ -1,0 +1,1 @@
+// Handle background tasks (e.g., data storage, authentication)

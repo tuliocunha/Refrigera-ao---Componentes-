@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Havc Tulio Quiz</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div id="login">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username"><br>
+    <input type="email" id="email" placeholder="Email"><br>
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div id="units" style="display:none;">
+    <h2>Choose Unit</h2>
+    <div id="unit-buttons"></div>
+    <button onclick="goToTopics()">Next</button>
+  </div>
+
+  <div id="topics" style="display:none;">
+    <h2>Choose Topic</h2>
+    <div id="topic-buttons"></div>
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <div id="quiz" style="display:none;">
+    <h2 id="question">Question</h2>
+    <div id="alternatives"></div>
+    <input type="text" id="answer" placeholder="Your answer"><br>
+    <button onclick="submitAnswer()">Submit</button>
+    <p id="comment"></p>
+    <button onclick="nextQuestion()">Next</button>
+    <div id="timer">Time left: 0:00</div>
+    <div id="score">Score: 0/0</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

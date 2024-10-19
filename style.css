@@ -1,0 +1,139 @@
+let user = {};
+let units = ["Unit 1", "Unit 2"];
+let topics = ["Topic 1", "Topic 2"];
+let questions = [{
+  unit: "Unit 1",
+  topic: "Topic 1",
+  question: "What is HVAC?",
+  alternatives: ["Heating", "Ventilation", "Air Conditioning"],
+  rightAnswer: "Heating",
+  tips: {
+    right: "Correct! 🎉",
+    wrong: "Hint: It's one of the basic functions."
+  },
+  comment: "HVAC stands for Heating, Ventilation, and Air Conditioning.",
+  questionType: "Multiple Choice",
+  levelOfDifficulty: "Easy",
+  maxAnswerTime: 30
+}];
+
+let score = 0;
+let totalQuestions = 0;
+let timer;
+let remainingTime;
+
+function login() {
+  user.name = document.getElementById("username").value;
+  user.email = document.getElementById("email").value;
+  document.getElementById("login").style.display = "none";
+  document.getElementById("units").style.display = "block";
+  loadUnits();
+}
+
+function loadUnits() {
+  let unitButtons = document.getElementById("unit-buttons");
+  units.forEach(unit => {
+    let button = document.createElement("button");
+    button.innerText = unit;
+    button.onclick = function() {
+      user.unit = unit;
+      goToTopics();
+    };
+    unitButtons.appendChild(button);
+  });
+}
+
+function goToTopics() {
+  document.getElementById("units").style.display = "none";
+  document.getElementById("topics").style.display = "block";
+  loadTopics();
+}
+
+function loadTopics() {
+  let topicButtons = document.getElementById("topic-buttons");
+  topics.forEach(topic => {
+    let button = document.createElement("button");
+    button.innerText = topic;
+    button.onclick = function() {
+      user.topic = topic;
+      selectTime();
+    };
+    topicButtons.appendChild(button);
+  });
+}
+
+function selectTime() {
+  let timeSelection = prompt("Enter quiz duration: 5, 10 or 15 minutes");
+  remainingTime = parseInt(timeSelection) * 60;
+  startQuiz();
+}
+
+function startQuiz() {
+  document.getElementById("topics").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  loadQuestion();
+  startTimer();
+}
+
+function loadQuestion() {
+  let question = questions.find(q => q.unit === user.unit && q.topic === user.topic);
+  document.getElementById("question").innerText = question.question;
+  let alternatives = document.getElementById("alternatives");
+  alternatives.innerHTML = '';
+  question.alternatives.forEach(alt => {
+    let button = document.createElement("button");
+    button.innerText = alt;
+    button.onclick = function() {
+      document.getElementById("answer").value = alt;
+    };
+    alternatives.appendChild(button);
+  });
+}
+
+function submitAnswer() {
+  let question = questions.find(q => q.unit === user.unit && q.topic === user.topic);
+  let userAnswer = document.getElementById("answer").value;
+  if (userAnswer === question.rightAnswer) {
+    document.getElementById("comment").innerText = question.tips.right;
+    score++;
+  } else {
+    document.getElementById("comment").innerText = question.tips.wrong;
+  }
+  totalQuestions++;
+  displayComment(question.comment);
+  updateScore();
+}
+
+function displayComment(comment) {
+  document.getElementById("comment").innerText = comment;
+}
+
+function nextQuestion() {
+  document.getElementById("comment").innerText = '';
+  document.getElementById("answer").value = '';
+  if (remainingTime > 0) {
+    loadQuestion();
+  } else {
+    endQuiz();
+  }
+}
+
+function startTimer() {
+  timer = setInterval(function() {
+    remainingTime--;
+    document.getElementById("timer").innerText = `Time left: ${Math.floor(remainingTime / 60)}:${remainingTime % 60}`;
+    if (remainingTime <= 0) {
+      clearInterval(timer);
+      endQuiz();
+    }
+  }, 1000);
+}
+
+function updateScore() {
+  document.getElementById("score").innerText = `Score: ${score}/${totalQuestions}`;
+}
+
+function endQuiz() {
+  document.getElementById("quiz").style.display = "none";
+  alert(`Quiz over! Your final score is ${score}/${totalQuestions}`);
+}

@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "HVAC Tulio Quiz",
+  "version": "1.0.1",
+  "description": "A quiz extension for HVAC professionals",
+  "permissions": ["activeTab", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["popup.js"]
+    }
+  ]
+}
